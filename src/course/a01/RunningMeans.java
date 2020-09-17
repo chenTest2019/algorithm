@@ -11,8 +11,8 @@ import java.util.Arrays;
 public class RunningMeans {
     public static void main(String[] args) {
         RunningMeans runningMeans = new RunningMeans();
-        int[] nums = {1, 2, 5, 7, 9};
-        int[] ans = runningMeans.handel(nums, 2);
+        int[] nums = {4,3,5,4,3,3,6,7};
+        int[] ans = runningMeans.handel(nums, 3);
         System.out.println(Arrays.toString(ans));
 
     }
@@ -33,22 +33,29 @@ public class RunningMeans {
         ArrayDeque<Integer> deque=new ArrayDeque<>();
         for (int i = 0; i < nums.length; i++) {
             while (!deque.isEmpty()){
-                if(nums[i]>=deque.peekLast()){
+                if(nums[i]>=nums[deque.peekLast()]){
                     deque.removeLast();
                 }else{
-                    deque.addLast(nums[i]);
+                    deque.addLast(i);
                     break;
                 }
             }
             if(deque.isEmpty()){
-                deque.addLast(nums[i]);
+                deque.addLast(i);
             }
-            int j=0;
-            if((j=i-(k-1))>=0){
-                ans[j]=deque.peekFirst();
-                deque.removeFirst();
+
+            if(i>=k-1){
+                ans[i-k+1]=deque.peekFirst();
+                if(i-k+1==deque.peekFirst()){
+                    deque.removeFirst();
+                }
             }
         }
+
+        for (int i = 0; i < ans.length; i++) {
+            ans[i]=nums[ans[i]];
+        }
+
         return ans;
     }
 
