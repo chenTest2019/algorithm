@@ -31,6 +31,7 @@ public class RunningMeans {
         ans=new int[len];
         //从大到小
         ArrayDeque<Integer> deque=new ArrayDeque<>();
+        int index=0;
         for (int i = 0; i < nums.length; i++) {
             while (!deque.isEmpty()){
                 if(nums[i]>=nums[deque.peekLast()]){
@@ -43,18 +44,16 @@ public class RunningMeans {
             if(deque.isEmpty()){
                 deque.addLast(i);
             }
-
+            //队列的头部过期
+            if(i-k==deque.peekFirst()){
+                deque.removeFirst();
+            }
+            //此时滑动窗口已达到长度为k
             if(i>=k-1){
-                ans[i-k+1]=deque.peekFirst();
-                if(i-k+1==deque.peekFirst()){
-                    deque.removeFirst();
-                }
+                ans[index++]=nums[deque.peekFirst()];
             }
         }
 
-        for (int i = 0; i < ans.length; i++) {
-            ans[i]=nums[ans[i]];
-        }
 
         return ans;
     }
