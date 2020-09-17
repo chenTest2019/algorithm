@@ -43,8 +43,9 @@ public class RunningMeans {
             if(deque.isEmpty()){
                 deque.addLast(nums[i]);
             }
-            if(i>=k-1){
-                ans[i-k+1]=deque.peekFirst();
+            int j=0;
+            if((j=i-(k-1))>=0){
+                ans[j]=deque.peekFirst();
                 deque.removeFirst();
             }
         }
