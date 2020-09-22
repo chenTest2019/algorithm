@@ -7,6 +7,7 @@ import java.util.Arrays;
 假设一个固定大小为k的窗口
  依次划过nums数组
  返回每一次划出状况的最大值
+ * @author jack
  */
 public class RunningMeans {
     public static void main(String[] args) {
